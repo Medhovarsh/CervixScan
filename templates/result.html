@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Prediction Results{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Analysis Results</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5 mb-4 mb-md-0">
+                            <h4>Uploaded Image</h4>
+                            <div class="image-container border p-2 rounded">
+                                <img src="data:image/jpeg;base64,{{ image_data }}" alt="Uploaded Image" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h4>Prediction</h4>
+                            <div class="result-box p-4 rounded">
+                                <div class="mb-4">
+                                    <h5>Classification:</h5>
+                                    <div class="result-classification 
+                                        {% if prediction == 'Normal' %}text-success{% elif prediction == 'Precancerous' %}text-warning{% else %}text-danger{% endif %}">
+                                        <i class="fas 
+                                            {% if prediction == 'Normal' %}fa-check-circle{% elif prediction == 'Precancerous' %}fa-exclamation-triangle{% else %}fa-times-circle{% endif %} 
+                                            me-2"></i>
+                                        <span>{{ prediction }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h5>Confidence Level:</h5>
+                                    <div class="progress" style="height: 25px;">
+                                        <div class="progress-bar 
+                                            {% if prediction == 'Normal' %}bg-success{% elif prediction == 'Precancerous' %}bg-warning{% else %}bg-danger{% endif %}" 
+                                            role="progressbar" 
+                                            style="width: {{ confidence }}%;" 
+                                            aria-valuenow="{{ confidence }}" 
+                                            aria-valuemin="0" 
+                                            aria-valuemax="100">
+                                            {{ confidence }}%
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="result-interpretation mt-4 p-3 bg-light rounded">
+                                    <h5><i class="fas fa-info-circle me-2"></i>Interpretation</h5>
+                                    {% if prediction == 'Normal' %}
+                                        <p>The analysis indicates normal cervical tissue with no signs of abnormalities.</p>
+                                    {% elif prediction == 'Precancerous' %}
+                                        <p>The analysis indicates potential precancerous lesions that should be evaluated by a healthcare provider.</p>
+                                    {% else %}
+                                        <p>The analysis indicates patterns consistent with cancerous cells. Immediate medical consultation is recommended.</p>
+                                    {% endif %}
+                                    <p class="mb-0 mt-2"><strong>Recommendation:</strong> 
+                                        {% if prediction == 'Normal' %}
+                                            Continue with regular screening as recommended by your healthcare provider.
+                                        {% else %}
+                                            Share these results with your healthcare provider for further evaluation and diagnosis.
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 mt-4">
+                                <a href="/predict" class="btn btn-primary">
+                                    <i class="fas fa-upload me-2"></i>Analyze Another Image
+                                </a>
+                                <button onclick="window.print()" class="btn btn-outline-secondary">
+                                    <i class="fas fa-print me-2"></i>Print Results
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <div class="disclaimer small text-center">
+                        <i class="fas fa-exclamation-circle me-1"></i>
+                        <strong>Medical Disclaimer:</strong> This is an AI-generated prediction and should not replace professional medical advice.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
