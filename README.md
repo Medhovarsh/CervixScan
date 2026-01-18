@@ -40,12 +40,12 @@ The model was wrapped in a **Flask** API and deployed to the cloud, allowing for
 * **Visualization:** Matplotlib
 
 ## The Team
-* **B Medhovarsh**
-* **A Supreeth**
-* **A Harshitha**
-* **A Karthik**
+* **Medhovarsh Bayyapureddi**
+* **Supreeth Amartaluru**
+* **Sri Harshitha Anantatmula**
+* **Karthik Aduri**
 
-**Project Guide:** Ms. Vinitha Panicker J (Dept. of CSE, Amrita School of Engineering)
+**Project Guide:** Mrs. Vinitha Panicker J (Dept. of CSE, Amrita School of Engineering)
 
 ## How to Run locally
 
